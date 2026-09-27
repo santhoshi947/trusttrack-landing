@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustTrack | Verified. Tracked. Trusted.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            900: '#0F172A', // Deep Navy
+                            800: '#1E3A8A', // Dark Blue
+                            600: '#2563EB', // Vibrant Blue
+                            teal: '#0D9488', // Deep Teal
+                            accent: '#14B8A6', // Bright Teal
+                            emerald: '#10B981', // Clean Emerald
+                            mint: '#D1FAE5', // Soft Mint
+                            coral: '#EF4444', // Alert Coral
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 10px 25px -5px rgba(13, 148, 136, 0.25)',
+                        'card': '0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04)',
+                        'card-hover': '0 20px 30px -10px rgba(15, 23, 42, 0.12), 0 8px 12px -4px rgba(15, 23, 42, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+            overflow-x: hidden;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0F172A 0%, #0D9488 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-accent-text {
+            background: linear-gradient(135deg, #0D9488 0%, #2563EB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Pulse and scanner keyframe animations */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        @keyframes scan-line {
+            0% { top: 10%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 90%; opacity: 0; }
+        }
+
+        .animate-scan {
+            position: absolute;
+            animation: scan-line 2.5s ease-in-out infinite;
+        }
+
+        .pulse-badge {
+            animation: pulse-ring 3s infinite ease-in-out;
+        }
+
+        /* Smooth tab transition styling */
+        .tab-btn.active {
+            background-color: #0D9488;
+            color: white;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+
+        /* Modal backdrop transition */
+        .modal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .modal.hidden-modal {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-200/80 transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-900 via-brand-teal to-brand-emerald flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-200">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-brand-900 block leading-none">Trust<span class="text-brand-teal">Track</span></span>
+                        <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-widest block mt-0.5">Verified Deliveries</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#problem" class="text-sm font-medium text-slate-600 hover:text-brand-teal transition-colors">Problem</a>
+                    <a href="#features" class="text-sm font-medium text-slate-600 hover:text-brand-teal transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-sm font-medium text-slate-600 hover:text-brand-teal transition-colors">How It Works</a>
+                    <a href="#use-case" class="text-sm font-medium text-slate-600 hover:text-brand-teal transition-colors">Live Simulation</a>
+                    <a href="#pricing" class="text-sm font-medium text-slate-600 hover:text-brand-teal transition-colors">Pricing</a>
+                    <a href="#partners" class="text-sm font-medium text-slate-600 hover:text-brand-teal transition-colors">For Partners</a>
+                </nav>
+
+                <!-- CTA & Action Buttons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Prototype Stage
+                    </span>
+                    <button onclick="openModal('demoModal')" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-brand-900 hover:bg-brand-teal shadow-md hover:shadow-glow transition-all duration-300">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center gap-2">
+                    <button id="mobileMenuBtn" class="p-2 rounded-lg text-slate-600 hover:text-brand-900 hover:bg-slate-100 focus:outline-none" aria-label="Toggle Navigation">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#problem" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Problem</a>
+            <a href="#features" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Features</a>
+            <a href="#how-it-works" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">How It Works</a>
+            <a href="#use-case" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Live Simulation</a>
+            <a href="#pricing" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Pricing</a>
+            <a href="#partners" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">For Partners</a>
+            <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
+                <div class="text-xs text-slate-500 text-center mb-1">Early-stage Student Startup</div>
+                <button onclick="openModal('demoModal'); closeMobileMenu();" class="w-full text-center px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-brand-teal hover:bg-brand-900 transition-colors">
+                    Get Started / Request Demo
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-b from-slate-50 via-teal-50/20 to-slate-50">
+        <!-- Background Ambient Glow Shapes -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-teal/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Left Column - Copy -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-200 text-xs font-semibold text-brand-900">
+                        <span class="px-2 py-0.5 rounded-full bg-brand-teal text-white text-[10px] font-bold uppercase tracking-wider">Early-Stage</span>
+                        <span>Student Startup Venture Prototype</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15]">
+                        Know more than <span class="gradient-accent-text">where your package is.</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        TrustTrack makes high-value deliveries transparent and accountable by verifying package handling, detecting tampering, and providing real-time journey visibility.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#how-it-works" class="w-full sm:w-auto text-center px-7 py-3.5 rounded-xl font-bold text-white bg-brand-teal hover:bg-brand-900 shadow-lg shadow-brand-teal/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>See How It Works</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#features" class="w-full sm:w-auto text-center px-7 py-3.5 rounded-xl font-bold text-slate-700 bg-white border border-slate-200 hover:border-brand-teal hover:bg-slate-50 transition-all duration-300">
+                            Explore Features
+                        </a>
+                    </div>
+
+                    <!-- Trust indicators / Highlights -->
+                    <div class="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <span class="block text-xl font-extrabold text-brand-900">QR Scan</span>
+                            <span class="text-xs text-slate-500 font-medium">Checkpoint Proof</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-extrabold text-brand-teal">Smart Seal</span>
+                            <span class="text-xs text-slate-500 font-medium">Tamper Alerts</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-extrabold text-emerald-600">Pre-Accept</span>
+                            <span class="text-xs text-slate-500 font-medium">Customer Verification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Column - Interactive SVG Package Illustration -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        
+                        <!-- Floating Glass Card Visual Container -->
+                        <div class="relative bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-card border border-slate-100 hover:shadow-card-hover transition-all duration-300">
+                            
+                            <!-- Header Status Strip -->
+                            <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Live Track ID: #TRK-88902</span>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-brand-teal/10 text-brand-teal border border-brand-teal/20">
+                                    High-Value Item
+                                </span>
+                            </div>
+
+                            <!-- Package Box Graphics -->
+                            <div class="relative bg-slate-50 rounded-2xl p-6 border border-slate-200/80 mb-6 flex flex-col items-center">
+                                
+                                <!-- Scanner Line Animation -->
+                                <div class="w-full h-0.5 bg-brand-accent animate-scan shadow-[0_0_8px_#14B8A6]"></div>
+
+                                <!-- Package Box Mockup -->
+                                <div class="w-48 h-36 bg-amber-100/80 border-2 border-amber-300/80 rounded-lg shadow-md relative flex flex-col items-center justify-center p-3 my-2">
+                                    
+                                    <!-- Packaging Tape -->
+                                    <div class="absolute inset-x-0 h-8 bg-amber-200/70 top-1/2 -translate-y-1/2 border-y border-amber-300"></div>
+                                    
+                                    <!-- Tamper Evident Seal Badge -->
+                                    <div class="absolute -top-3 -right-3 bg-brand-900 text-emerald-400 p-2 rounded-xl shadow-lg flex items-center gap-1.5 text-xs font-bold border border-slate-700">
+                                        <i data-lucide="lock" class="w-3.5 h-3.5 text-emerald-400"></i>
+                                        <span>SEAL INTRACT</span>
+                                    </div>
+
+                                    <!-- Package QR Code Graphic -->
+                                    <div class="relative z-10 bg-white p-2 rounded-lg border border-slate-300 shadow-sm flex items-center justify-center">
+                                        <svg class="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3z" fill="#0F172A" stroke="none"/>
+                                            <path d="M10 3h1v1h-1zM13 3h1v1h-1zM3 10h1v1h-1zM3 13h1v1h-1zM10 10h4v4h-4z" fill="#0D9488"/>
+                                            <path d="M15 15h2v2h-2zM19 15h2v2h-2zM15 19h2v2h-2zM19 19h2v2h-2z" fill="#0F172A"/>
+                                        </svg>
+                                    </div>
+                                    <span class="relative z-10 text-[9px] font-mono text-amber-900 font-bold mt-1">TRUSTTRACK-SEALED</span>
+                                </div>
+
+                                <!-- Interactive Toggle Buttons for Simulation in Hero -->
+                                <div class="mt-4 w-full flex items-center justify-between text-xs pt-3 border-t border-slate-200/60">
+                                    <span class="text-slate-500 font-medium">Interactive Preview:</span>
+                                    <button id="toggleSealBtn" onclick="toggleHeroTamperState()" class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 font-semibold hover:border-brand-teal transition-all text-[11px]">
+                                        Test Tamper Alert
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Live Status Info Feed -->
+                            <div class="space-y-3" id="heroStatusBox">
+                                <div class="flex items-start gap-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200/60 transition-all" id="heroStatusBanner">
+                                    <div class="p-1.5 rounded-lg bg-emerald-100 text-emerald-700" id="heroStatusIcon">
+                                        <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-800" id="heroStatusTitle">Handling Checkpoint #4 Verified</div>
+                                        <div class="text-[11px] text-slate-600" id="heroStatusDesc">Package scanned at Regional Hub. Seal status verified 100% intact.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Legend Badge -->
+                            <div class="mt-4 flex items-center justify-between text-[11px] text-slate-500 px-1">
+                                <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-teal"></i> GPS Tracking</span>
+                                <span class="flex items-center gap-1"><i data-lucide="shield" class="w-3.5 h-3.5 text-brand-teal"></i> Smart QR Seal</span>
+                                <span class="flex items-center gap-1"><i data-lucide="bell" class="w-3.5 h-3.5 text-brand-teal"></i> Real-time Alerts</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-20 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-teal bg-teal-50 border border-teal-100">The Problem</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 mt-3 tracking-tight">The Delivery Visibility Gap</h2>
+                <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                    Traditional courier tracking tells you <span class="text-brand-900 font-semibold">where</span> a package is located on a map, but leaves customers and brands completely blind to <span class="text-brand-900 font-semibold">how</span> it was handled or if it was tampered with in transit.
+                </p>
+            </div>
+
+            <!-- 3 Problem Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Problem 1 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200/80 hover:border-slate-300 transition-all duration-300 relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="help-circle" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Package Uncertainty</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        When receiving laptops, jewelry, or electronics worth thousands, buyers cannot know if the contents are intact inside until after unboxing—making immediate dispute claims difficult.
+                    </p>
+                </div>
+
+                <!-- Problem 2 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200/80 hover:border-slate-300 transition-all duration-300 relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Tampering & Swap Risk</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        High-value parcels pass through dozens of hands. Mid-transit package swapping, seal breaching, or subtle box opening remains undetectable with conventional cardboard taping.
+                    </p>
+                </div>
+
+                <!-- Problem 3 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200/80 hover:border-slate-300 transition-all duration-300 relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="slash" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-900 mb-3">Limited Accountability</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        When a delivery goes wrong, logistics providers and sellers blame each other. The absence of verifiable handling logs makes it hard to pinpoint exactly where damage occurred.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Comparison Bar Highlight -->
+            <div class="mt-14 bg-gradient-to-r from-brand-900 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="text-xs font-bold text-brand-accent uppercase tracking-wider mb-2">The Difference</div>
+                        <h4 class="text-2xl font-bold">Traditional Tracking vs. TrustTrack</h4>
+                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                            Upgrade from simple GPS dots to complete physical package integrity verification at every critical handover point.
+                        </p>
+                    </div>
+                    <div class="space-y-3 bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/10">
+                        <div class="flex items-center gap-3 text-sm text-slate-300">
+                            <i data-lucide="x-circle" class="w-5 h-5 text-red-400 shrink-0"></i>
+                            <span><strong>Standard Courier:</strong> "Package in Transit - City Hub"</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-emerald-300 font-semibold border-t border-white/10 pt-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+                            <span><strong>TrustTrack:</strong> "Scan #3 Verified • Tamper Seal Intact • Handled by Agent ID 4092"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-teal bg-teal-50 border border-teal-100">Key Capabilities</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 mt-3 tracking-tight">One Delivery. More Transparency.</h2>
+                <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                    TrustTrack equips every shipment with multi-layered verification technology to safeguard high-value goods end-to-end.
+                </p>
+            </div>
+
+            <!-- 6 Feature Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-6">
+                            <i data-lucide="qr-code" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-900 mb-2">QR-Based Verification</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Unique secure QR codes bound to physical package seals allow quick scanning and identity matching at every warehouse and transit stop.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-brand-teal font-semibold flex items-center gap-1">
+                        <span>Unique Digital Identity</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center mb-6">
+                            <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-900 mb-2">Tamper Detection</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Tamper-evident packaging indicators show clear physical or optical evidence if someone attempts to unseal or rupture the container.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-brand-600 font-semibold flex items-center gap-1">
+                        <span>Physical Integrity Seal</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6">
+                            <i data-lucide="navigation" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-900 mb-2">Real-Time Tracking</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Live GPS monitoring synced with route milestones gives buyers and logistics teams accurate live location visibility throughout travel.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-emerald-600 font-semibold flex items-center gap-1">
+                        <span>Live Location Sync</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6">
+                            <i data-lucide="bell-ring" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-900 mb-2">Important Updates</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Automated instant SMS and WhatsApp delivery alerts whenever a key checkpoint is passed or if any handling anomaly is detected.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-amber-600 font-semibold flex items-center gap-1">
+                        <span>Instant Anomaly Alerts</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6">
+                            <i data-lucide="file-check-2" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-900 mb-2">Handling History</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            A complete timestamped audit log of every scan, handler ID, hub location, and seal condition check from origin to final doorstep.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-purple-600 font-semibold flex items-center gap-1">
+                        <span>Auditable Handover Chain</span>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-6">
+                            <i data-lucide="user-check" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-900 mb-2">Customer Confidence</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Empowers the customer to verify seal integrity and scan the code together with the courier before accepting high-value parcels.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-brand-teal font-semibold flex items-center gap-1">
+                        <span>Pre-Acceptance Power</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-teal bg-teal-50 border border-teal-100">Simple Process</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 mt-3 tracking-tight">How TrustTrack Works</h2>
+                <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                    A seamless 4-step verification flow built to integrate easily with existing logistics pipelines.
+                </p>
+            </div>
+
+            <!-- Connected 4-Step Process Flow -->
+            <div class="relative">
+                
+                <!-- Connection Line (Desktop) -->
+                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-teal via-brand-600 to-emerald-500 -translate-y-6 z-0"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+                    
+                    <!-- Step 1 -->
+                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 text-center relative group hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-900 text-white flex items-center justify-center font-bold text-xl mx-auto mb-5 shadow-lg group-hover:bg-brand-teal transition-colors">
+                            1
+                        </div>
+                        <div class="inline-block px-3 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-800 mb-2">SECURE</div>
+                        <h3 class="text-lg font-bold text-brand-900 mb-2">Package Sealed</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            High-value item is packaged with a TrustTrack tamper-evident seal and assigned a unique QR tracking identifier at dispatch.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 text-center relative group hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-900 text-white flex items-center justify-center font-bold text-xl mx-auto mb-5 shadow-lg group-hover:bg-brand-teal transition-colors">
+                            2
+                        </div>
+                        <div class="inline-block px-3 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800 mb-2">SCAN</div>
+                        <h3 class="text-lg font-bold text-brand-900 mb-2">Checkpoint Logs</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            Logistics staff scan the QR code at each sorting hub. Seal status and handler details are logged instantaneously.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 text-center relative group hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-900 text-white flex items-center justify-center font-bold text-xl mx-auto mb-5 shadow-lg group-hover:bg-brand-teal transition-colors">
+                            3
+                        </div>
+                        <div class="inline-block px-3 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-2">TRACK</div>
+                        <h3 class="text-lg font-bold text-brand-900 mb-2">Live Visibility</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            Buyer and seller receive real-time journey updates. Immediate warnings trigger if seal disruption is detected.
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 text-center relative group hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-900 text-white flex items-center justify-center font-bold text-xl mx-auto mb-5 shadow-lg group-hover:bg-brand-teal transition-colors">
+                            4
+                        </div>
+                        <div class="inline-block px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 mb-2">VERIFY</div>
+                        <h3 class="text-lg font-bold text-brand-900 mb-2">Final Verification</h3>
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            Before accepting, the customer scans the QR code on delivery to confirm 100% untampered seal status.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Customer Use Case Section -->
+    <section id="use-case" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        
+        <!-- Background accents -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-teal/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-accent bg-white/10 border border-white/20">Real-World Scenario</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">Imagine ordering a ₹80,000 laptop online.</h2>
+                <p class="text-slate-300 mt-3 text-base sm:text-lg">
+                    Experience how TrustTrack protects your high-value order through every stage of delivery. Click the steps below to simulate the journey!
+                </p>
+            </div>
+
+            <!-- Interactive Simulator Widget -->
+            <div class="bg-slate-800/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-slate-700 shadow-2xl max-w-4xl mx-auto">
+                
+                <!-- Interactive Timeline Step Buttons -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-8">
+                    <button onclick="setSimStep(1)" id="simTab1" class="tab-btn active px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-slate-700 transition-all text-center">
+                        1. Warehouse Dispatch
+                    </button>
+                    <button onclick="setSimStep(2)" id="simTab2" class="tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-700/50 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-all text-center">
+                        2. Sorting Hub Scan
+                    </button>
+                    <button onclick="setSimStep(3)" id="simTab3" class="tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-700/50 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-all text-center">
+                        3. In-Transit Check
+                    </button>
+                    <button onclick="setSimStep(4)" id="simTab4" class="tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-700/50 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-all text-center">
+                        4. Tamper Scan Test
+                    </button>
+                    <button onclick="setSimStep(5)" id="simTab5" class="tab-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-700/50 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-all text-center">
+                        5. Final Handover
+                    </button>
+                </div>
+
+                <!-- Simulation Content Box -->
+                <div class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-700/80 min-h-[220px] flex flex-col justify-between" id="simDisplayBox">
+                    <!-- Dynamic JS Injected Content -->
+                </div>
+
+                <!-- Interactive Help Banner -->
+                <div class="mt-6 flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-700/60">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-brand-accent"></i>
+                        <span>Click steps 1 to 5 to simulate live delivery verification logs.</span>
+                    </span>
+                    <span class="font-mono text-slate-500">Item: Pro Laptop (₹80,000)</span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Value Proposition Highlight Banner -->
+    <section class="py-12 bg-gradient-to-r from-brand-teal via-brand-600 to-brand-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-4xl mx-auto space-y-3">
+                <i data-lucide="shield-check" class="w-10 h-10 mx-auto text-brand-accent"></i>
+                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                    "Transparent tracking that reduces tampering risk, verifies handling, and builds customer trust."
+                </h3>
+                <p class="text-teal-100 text-sm sm:text-base">
+                    Built for consumers buying high-value goods & logistics partners committed to zero delivery fraud.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-teal bg-teal-50 border border-teal-100">Simple & Transparent</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 mt-3 tracking-tight">Flexible Business Model</h2>
+                <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                    Affordable pay-per-use for individual buyers and scalable enterprise plans for logistics providers.
+                </p>
+            </div>
+
+            <!-- Pricing Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <!-- Card 1: Individual Customers -->
+                <div class="bg-white rounded-3xl p-8 sm:p-10 border-2 border-brand-teal shadow-card hover:shadow-card-hover transition-all duration-300 relative flex flex-col justify-between">
+                    
+                    <div class="absolute -top-3.5 right-8 bg-brand-teal text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        For Individual Buyers
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold text-brand-900">Pay-Per-Use</h3>
+                        <p class="text-slate-500 text-sm mt-1">For single high-value purchases (laptops, phones, luxury goods)</p>
+
+                        <div class="my-8 flex items-baseline gap-2">
+                            <span class="text-5xl font-extrabold text-brand-900">₹100</span>
+                            <span class="text-slate-500 font-medium text-sm">/ tracked package</span>
+                        </div>
+
+                        <ul class="space-y-4 mb-8 text-sm text-slate-700">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-teal shrink-0"></i>
+                                <span><strong>QR Verification:</strong> Secure code seal on packaging</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-teal shrink-0"></i>
+                                <span><strong>Tamper Detection:</strong> Real-time unsealing alerts</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-teal shrink-0"></i>
+                                <span><strong>Journey Visibility:</strong> Full timestamped handler logs</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-teal shrink-0"></i>
+                                <span><strong>Important Alerts:</strong> SMS/WhatsApp status updates</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-teal shrink-0"></i>
+                                <span><strong>Pre-Accept Verification:</strong> Customer check before sign-off</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openModal('demoModal')" class="w-full py-3.5 rounded-xl font-bold text-white bg-brand-teal hover:bg-brand-900 transition-colors shadow-md text-center">
+                        Track My Next Delivery
+                    </button>
+
+                </div>
+
+                <!-- Card 2: B2B SaaS -->
+                <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+                    
+                    <div>
+                        <div class="inline-block bg-slate-100 text-slate-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                            For E-Commerce & Logistics
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-brand-900">B2B SaaS Enterprise</h3>
+                        <p class="text-slate-500 text-sm mt-1">Custom API integration for volume platforms & courier networks</p>
+
+                        <div class="my-8 flex items-baseline gap-2">
+                            <span class="text-4xl font-extrabold text-brand-900">Custom SaaS</span>
+                            <span class="text-slate-500 font-medium text-sm">Volume Based</span>
+                        </div>
+
+                        <ul class="space-y-4 mb-8 text-sm text-slate-700">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-600 shrink-0"></i>
+                                <span><strong>Seamless API/Webhook</strong> integration with existing WMS</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-600 shrink-0"></i>
+                                <span><strong>Bulk QR & Tamper Seal</strong> supplies & automated generation</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-600 shrink-0"></i>
+                                <span><strong>Drastic ROI:</strong> Reduces fraudulent return claims by up to 70%</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-600 shrink-0"></i>
+                                <span><strong>Dedicated Support</strong> & SLA guarantees for partner hubs</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-600 shrink-0"></i>
+                                <span><strong>Analytics Dashboard:</strong> Delivery accountability audit logs</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openModal('partnerModal')" class="w-full py-3.5 rounded-xl font-bold text-brand-900 bg-slate-100 hover:bg-brand-900 hover:text-white transition-all text-center">
+                        Partner With Us
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- For Business Partners Section -->
+    <section id="partners" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-teal bg-teal-50 border border-teal-100">B2B Solutions</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 tracking-tight">
+                        Built for E-Commerce Platforms & Courier Logistics
+                    </h2>
+                    <p class="text-slate-600 text-base leading-relaxed">
+                        High-value transit disputes hurt customer lifetime value and create massive operational overhead. TrustTrack offers logistics operators and brands complete delivery accountability.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center shrink-0 mt-1">
+                                <i data-lucide="shield" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-900">Better Delivery Accountability</h4>
+                                <p class="text-slate-600 text-xs mt-1">Clear attribution of responsibility across third-party fulfillment centers, transit hubs, and last-mile couriers.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0 mt-1">
+                                <i data-lucide="eye" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-900">Greater Customer Transparency</h4>
+                                <p class="text-slate-600 text-xs mt-1">Eliminate anxiety around purchasing high-end electronics, jewelry, or documents online.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-1">
+                                <i data-lucide="trending-up" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-900">Tampering & Swap Prevention</h4>
+                                <p class="text-slate-600 text-xs mt-1">Drastically cut down on fraudulent "empty box" or "item swapped" chargeback claims with timestamped physical seal logs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button onclick="openModal('partnerModal')" class="px-6 py-3 rounded-xl font-bold text-white bg-brand-900 hover:bg-brand-teal transition-colors shadow-md flex items-center gap-2">
+                            <span>Schedule Partner Call</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Visual Partner Card Graphic -->
+                <div class="lg:col-span-6">
+                    <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200/80 shadow-card">
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Partner Integration Dashboard Preview</div>
+                        
+                        <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-lg bg-brand-900 text-white flex items-center justify-center font-bold text-xs">API</div>
+                                    <span class="text-xs font-bold text-slate-800">Logistic Partner Hub #12</span>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Connected</span>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2 text-center py-2 bg-slate-50 rounded-lg">
+                                <div>
+                                    <div class="text-xs text-slate-500">Parcels Sealed</div>
+                                    <div class="text-lg font-bold text-brand-900">1,240</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-500">Verified Intact</div>
+                                    <div class="text-lg font-bold text-emerald-600">99.8%</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-500">Dispute Saved</div>
+                                    <div class="text-lg font-bold text-brand-teal">₹4.2L</div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 text-xs">
+                                <div class="flex items-center justify-between p-2 rounded bg-slate-50">
+                                    <span class="text-slate-600">Scan ID #8892 - Handover Hub B</span>
+                                    <span class="text-emerald-600 font-semibold">Verified Seal</span>
+                                </div>
+                                <div class="flex items-center justify-between p-2 rounded bg-slate-50">
+                                    <span class="text-slate-600">Scan ID #8891 - Sorting Facility</span>
+                                    <span class="text-emerald-600 font-semibold">Verified Seal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-500 mt-4 text-center italic">
+                            * TrustTrack is currently developing and validating this solution with select logistics pilot testing partners.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner Section -->
+    <section class="py-20 bg-brand-900 text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+                Make every valuable delivery more trustworthy.
+            </h2>
+            <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                We are currently developing and validating the TrustTrack prototype and are looking to connect with customers, e-commerce companies, and logistics partners.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="openModal('demoModal')" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-white bg-brand-teal hover:bg-teal-500 transition-all shadow-lg shadow-brand-teal/30">
+                    Request a Demo
+                </button>
+                <button onclick="openModal('partnerModal')" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-slate-200 bg-white/10 border border-white/20 hover:bg-white/20 transition-all">
+                    Partner With Us
+                </button>
+            </div>
+
+            <div class="mt-8 text-xs text-slate-400 max-w-lg mx-auto bg-slate-800/60 p-3 rounded-xl border border-slate-700/50">
+                <p><strong>Early Venture Note:</strong> TrustTrack is an early-stage venture prototype created for entrepreneurship assessment and pilot validation. Commercial services coming soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="md:col-span-2 space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-brand-teal flex items-center justify-center text-white font-bold">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">TrustTrack</span>
+                    </div>
+                    <p class="text-xs text-slate-400 font-semibold tracking-wide uppercase">Verified. Tracked. Trusted.</p>
+                    <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+                        Making high-value e-commerce deliveries transparent and accountable through physical tamper detection and verified digital checkpoint logging.
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-3">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#problem" class="hover:text-brand-accent transition-colors">Problem Statement</a></li>
+                        <li><a href="#features" class="hover:text-brand-accent transition-colors">Key Capabilities</a></li>
+                        <li><a href="#how-it-works" class="hover:text-brand-accent transition-colors">How It Works</a></li>
+                        <li><a href="#use-case" class="hover:text-brand-accent transition-colors">Live Simulation</a></li>
+                        <li><a href="#pricing" class="hover:text-brand-accent transition-colors">Pricing & B2B</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact & Venture info -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-3">Startup Contact</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-2">
+                        Student Entrepreneurship & Venture Assessment Project.
+                    </p>
+                    <a href="mailto:contact@trusttrack.demo" class="text-xs text-brand-accent font-semibold hover:underline block">
+                        contact@trusttrack.demo
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 TrustTrack Prototype. All Rights Reserved.</p>
+                <p class="mt-2 sm:mt-0">Designed for Early-Stage Venture Validation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Modals -->
+
+    <!-- Demo Request Modal -->
+    <div id="demoModal" class="modal hidden-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative border border-slate-100">
+            <button onclick="closeModal('demoModal')" class="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 text-slate-500" aria-label="Close Modal">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-teal-50 text-brand-teal flex items-center justify-center mx-auto mb-3">
+                    <i data-lucide="send" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold text-brand-900">Request TrustTrack Demo</h3>
+                <p class="text-xs text-slate-500 mt-1">Get early access to our package verification prototype.</p>
+            </div>
+
+            <form id="demoForm" onsubmit="handleFormSubmit(event, 'demoSuccess')" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Your Full Name</label>
+                    <input type="text" required placeholder="e.g., Alex Sharma" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+                    <input type="email" required placeholder="alex@example.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">User Category</label>
+                    <select class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-teal">
+                        <option>Individual Buyer (High-value items)</option>
+                        <option>E-Commerce Seller</option>
+                        <option>Logistics / Courier Representative</option>
+                        <option>Student / Investor / Evaluator</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl font-bold text-white bg-brand-teal hover:bg-brand-900 transition-colors shadow-md text-sm">
+                    Submit Request
+                </button>
+            </form>
+
+            <div id="demoSuccess" class="hidden text-center py-6 space-y-3">
+                <i data-lucide="check-circle-2" class="w-12 h-12 text-emerald-500 mx-auto"></i>
+                <h4 class="text-lg font-bold text-brand-900">Request Received!</h4>
+                <p class="text-xs text-slate-600">Thank you for testing the TrustTrack prototype portal. We will contact you shortly.</p>
+                <button onclick="closeModal('demoModal')" class="mt-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    Close Window
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partner Contact Modal -->
+    <div id="partnerModal" class="modal hidden-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative border border-slate-100">
+            <button onclick="closeModal('partnerModal')" class="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 text-slate-500" aria-label="Close Modal">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-600 flex items-center justify-center mx-auto mb-3">
+                    <i data-lucide="building-2" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold text-brand-900">Partner With TrustTrack</h3>
+                <p class="text-xs text-slate-500 mt-1">Explore B2B pilot integrations for your courier or storefront.</p>
+            </div>
+
+            <form id="partnerForm" onsubmit="handleFormSubmit(event, 'partnerSuccess')" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Company / Organization Name</label>
+                    <input type="text" required placeholder="e.g., Express Logistics Pvt Ltd" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Work Email</label>
+                    <input type="email" required placeholder="partner@company.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Monthly Package Volume</label>
+                    <select class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-600">
+                        <option>100 - 1,000 packages/mo</option>
+                        <option>1,000 - 10,000 packages/mo</option>
+                        <option>10,000+ packages/mo</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl font-bold text-white bg-brand-900 hover:bg-brand-600 transition-colors shadow-md text-sm">
+                    Send Partnership Request
+                </button>
+            </form>
+
+            <div id="partnerSuccess" class="hidden text-center py-6 space-y-3">
+                <i data-lucide="check-circle-2" class="w-12 h-12 text-emerald-500 mx-auto"></i>
+                <h4 class="text-lg font-bold text-brand-900">Partner Query Sent!</h4>
+                <p class="text-xs text-slate-600">Our startup team will reach out with pilot details and API specs.</p>
+                <button onclick="closeModal('partnerModal')" class="mt-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    Close Window
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initialize Lucide icons on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            setSimStep(1); // Initialize interactive simulator
+        });
+
+        // Mobile Menu Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Close mobile drawer when link clicked
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Modal Controls
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden-modal');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden-modal');
+                // Reset form views inside modal
+                const form = modal.querySelector('form');
+                const successDiv = modal.querySelector('[id$="Success"]');
+                if (form && successDiv) {
+                    form.classList.remove('hidden');
+                    successDiv.classList.add('hidden');
+                    form.reset();
+                }
+            }
+        }
+
+        function handleFormSubmit(e, successId) {
+            e.preventDefault();
+            const form = e.target;
+            const successDiv = document.getElementById(successId);
+            if (form && successDiv) {
+                form.classList.add('hidden');
+                successDiv.classList.remove('hidden');
+            }
+        }
+
+        // Hero Graphic Toggle Interactive State
+        let heroTampered = false;
+        function toggleHeroTamperState() {
+            heroTampered = !heroTampered;
+            const statusBanner = document.getElementById('heroStatusBanner');
+            const statusIcon = document.getElementById('heroStatusIcon');
+            const statusTitle = document.getElementById('heroStatusTitle');
+            const statusDesc = document.getElementById('heroStatusDesc');
+            const toggleBtn = document.getElementById('toggleSealBtn');
+
+            if (heroTampered) {
+                statusBanner.className = 'flex items-start gap-3 p-3 rounded-xl bg-red-50 border border-red-200/80 transition-all';
+                statusIcon.className = 'p-1.5 rounded-lg bg-red-100 text-red-700';
+                statusIcon.innerHTML = '<i data-lucide="alert-triangle" class="w-5 h-5"></i>';
+                statusTitle.textContent = 'TAMPER WARNING ALERT!';
+                statusTitle.className = 'text-xs font-bold text-red-800';
+                statusDesc.textContent = 'Seal rupture detected at transit point #3. Recipient alerted not to accept package without inspection.';
+                toggleBtn.textContent = 'Reset to Intact State';
+            } else {
+                statusBanner.className = 'flex items-start gap-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200/60 transition-all';
+                statusIcon.className = 'p-1.5 rounded-lg bg-emerald-100 text-emerald-700';
+                statusIcon.innerHTML = '<i data-lucide="check-circle-2" class="w-5 h-5"></i>';
+                statusTitle.textContent = 'Handling Checkpoint #4 Verified';
+                statusTitle.className = 'text-xs font-bold text-slate-800';
+                statusDesc.textContent = 'Package scanned at Regional Hub. Seal status verified 100% intact.';
+                toggleBtn.textContent = 'Test Tamper Alert';
+            }
+            lucide.createIcons();
+        }
+
+        // Interactive Customer Scenario Laptop Simulator (5 Steps)
+        const simData = {
+            1: {
+                title: "Step 1: Dispatch from E-Commerce Merchant Hub",
+                status: "VERIFIED SECURE",
+                statusClass: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+                icon: "package-check",
+                desc: "The ₹80,000 laptop box is sealed with a unique TrustTrack QR tape code at the fulfillment warehouse. Digital hash bound to merchant ID.",
+                details: [
+                    "Item: Pro Workstation Laptop (₹80,000)",
+                    "QR ID: #TT-88902-IND",
+                    "Tamper Tape: Active & Intact"
+                ]
+            },
+            2: {
+                title: "Step 2: Sorting Hub Optical Scan",
+                status: "CHECKPOINT LOGGED",
+                statusClass: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+                icon: "qr-code",
+                desc: "At the regional distribution center, automated scanners verify the intact QR code badge and log handler ID #HUB-409.",
+                details: [
+                    "Scan Time: Today, 14:32 IST",
+                    "Handler: Dispatch Agent #409",
+                    "Seal Status: Unbroken Pass"
+                ]
+            },
+            3: {
+                title: "Step 3: Mid-Transit GPS Checkpoint",
+                status: "IN TRANSIT",
+                statusClass: "bg-brand-accent/20 text-brand-accent border-brand-accent/30",
+                icon: "truck",
+                desc: "Vehicle sensors and checkpoint scans update the package location in real time. The customer receives an SMS update on progress.",
+                details: [
+                    "Location: Express Highway Hub",
+                    "Alert Sent: WhatsApp & SMS",
+                    "Estimated Delivery: Tomorrow 11:00 AM"
+                ]
+            },
+            4: {
+                title: "Step 4: Simulated Tamper Detection Test",
+                status: "TAMPER SENSOR ALERT",
+                statusClass: "bg-red-500/20 text-red-400 border-red-500/30 animate-pulse",
+                icon: "shield-alert",
+                desc: "IF someone attempts to tear or bypass the seal in transit, TrustTrack's optical pattern breaks and immediate alerts push to the customer's phone.",
+                details: [
+                    "System Action: Delivery Paused",
+                    "Customer Alert: 'Do not accept if seal is torn'",
+                    "Dispute Audit Log: Automatically Recorded"
+                ]
+            },
+            5: {
+                title: "Step 5: Pre-Acceptance Handover to Customer",
+                status: "READY FOR VERIFICATION",
+                statusClass: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+                icon: "user-check",
+                desc: "Delivery agent arrives. The customer scans the QR code on the box using their smartphone camera. TrustTrack confirms unbroken seal before sign-off!",
+                details: [
+                    "Verification: Passed 100%",
+                    "Customer Sign-off: Safe to Open",
+                    "Merchant Settlement: Fraud Risk Eliminated"
+                ]
+            }
+        };
+
+        function setSimStep(stepNum) {
+            // Update Tab Highlight Buttons
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`simTab${i}`);
+                if (btn) {
+                    if (i === stepNum) {
+                        btn.className = "tab-btn active px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-center";
+                    } else {
+                        btn.className = "tab-btn px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-700/50 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-all text-center";
+                    }
+                }
+            }
+
+            // Update simulator display box
+            const data = simData[stepNum];
+            const displayBox = document.getElementById('simDisplayBox');
+            if (displayBox && data) {
+                displayBox.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Simulator Stage ${stepNum} of 5</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-extrabold border ${data.statusClass}">
+                                ${data.status}
+                            </span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="${data.icon}" class="w-5 h-5 text-brand-accent"></i>
+                            <span>${data.title}</span>
+                        </h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">${data.desc}</p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        ${data.details.map(detail => `
+                            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-accent shrink-0"></i>
+                                <span>${detail}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                lucide.createIcons();
+            }
+        }
+    </script>
+</body>
+</html>
